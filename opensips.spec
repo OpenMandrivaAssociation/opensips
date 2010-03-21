@@ -147,12 +147,12 @@ Group:		System/Servers
 Requires:	%{name} = %{version}-%{release}
 
 %description	h350
-The OpenSER H350 module enables an OpenSIPS SIP proxy server to access SIP
+The OpenSIPS H350 module enables an OpenSIPS SIP proxy server to access SIP
 account data stored in an LDAP [RFC4510] directory  containing H.350 [H.350]
 commObjects.
 
 %package	jabber
-Summary:	Gateway between OpenSER and a jabber server
+Summary:	Gateway between OpenSIPS and a jabber server
 Group:		System/Servers
 Requires:	%{name} = %{version}-%{release}
 
@@ -344,13 +344,13 @@ message really reached its destination as a SMS--or multi-part messages--if
 a SIP messages is too long it will be split and sent as multiple SMS.
 
 %package	snmpstats
-Summary:	SNMP management interface for the OpenSER
+Summary:	SNMP management interface for the OpenSIPS
 Group:		System/Servers
 Requires:	%{name} = %{version}-%{release}
 
 %description	snmpstats
 The %{name}-snmpstats package provides an SNMP management interface to
-OpenSER.  Specifically, it provides general SNMP queryable scalar statistics,
+OpenSIPS.  Specifically, it provides general SNMP queryable scalar statistics,
 table representations of more complicated data such as user and contact
 information, and alarm monitoring capabilities.
 
@@ -385,12 +385,12 @@ GET requests. It also offers support for conditional queries. It uses libcurl
 library as a client-side HTTP transfer library.
 
 %package	xmpp
-Summary:	Gateway between OpenSER and a jabber server
+Summary:	Gateway between OpenSIPS and a jabber server
 Group:		System/Servers
 Requires:	%{name} = %{version}-%{release}
 
 %description	xmpp
-This modules is a gateway between Openser and a jabber server. It enables
+This modules is a gateway between OpenSIPS and a jabber server. It enables
 the exchange of instant messages between SIP clients and XMPP(jabber)
 clients.
 
