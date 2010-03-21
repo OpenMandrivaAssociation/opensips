@@ -36,6 +36,7 @@ BuildRequires:	perl(ExtUtils::MakeMaker)
 # for xsubpp:
 BuildRequires:	perl-devel
 BuildRequires:  json-c-devel
+BuildRequires:  memcached-devel
 
 # (Anssi 02/2008) Suggests as per debian:
 Suggests: %{name}-acc_radius
