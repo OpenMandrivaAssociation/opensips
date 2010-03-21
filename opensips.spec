@@ -10,6 +10,9 @@ Release:	%mkrel 1
 License:	GPLv2+
 Group:		System/Servers
 Source0:	http://www.opensips.org/pub/%{name}/%{version}/src/%{name}-%{version}-tls_src.tar.gz
+# not sent upstream yet
+Patch0:     opensips-1.6.2-fix_format_string.diff
+
 URL:		http://www.opensips.org/
 
 BuildRequires:	expat-devel
@@ -401,10 +404,10 @@ clients.
 
 %prep
 %setup -q -n %{name}-%{version}-tls
+%patch0 -p0
 cp -pRf modules/acc modules/acc_radius
 
 %build
-%define Werror_cflags %nil
 LOCALBASE=%{_prefix} CFLAGS="%{optflags}" %{make} all TLS=1 ENABLE_DIAMETER_ACC=true \
   exclude_modules="%EXCLUDE_MODULES" \
   cfg-target=%{_sysconfdir}/%{name}/ \
