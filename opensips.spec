@@ -36,7 +36,11 @@ BuildRequires:	perl(ExtUtils::MakeMaker)
 # for xsubpp:
 BuildRequires:	perl-devel
 BuildRequires:  json-c-devel
-BuildRequires:  memcached-devel
+# do not use memcached-devel
+# https://qa.mandriva.com/show_bug.cgi?id=58287
+BuildRequires:  devel(libmemcached)
+BuildRequires:  GeoIP-devel
+BuildRequires:  devel(libpcre)  
 
 # (Anssi 02/2008) Suggests as per debian:
 Suggests: %{name}-acc_radius
