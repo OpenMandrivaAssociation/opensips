@@ -41,9 +41,9 @@ BuildRequires:	perl-devel
 BuildRequires:  json-c-devel
 # do not use memcached-devel
 # https://qa.mandriva.com/show_bug.cgi?id=58287
-BuildRequires:  devel(libmemcached)
+BuildRequires:  pkgconfig(libmemcached)
 BuildRequires:  GeoIP-devel
-BuildRequires:  devel(libpcre)  
+BuildRequires:  pkgconfig(libpcre)  
 
 # (Anssi 02/2008) Suggests as per debian:
 Suggests: %{name}-acc_radius
