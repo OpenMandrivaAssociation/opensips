@@ -6,7 +6,7 @@
 Summary:	SIP Server
 Name:		opensips
 Version:	1.6.2
-Release:	%mkrel 2
+Release:	%mkrel 3
 License:	GPLv2+
 Group:		System/Servers
 Source0:	http://www.opensips.org/pub/%{name}/%{version}/src/%{name}-%{version}-tls_src.tar.gz
@@ -78,6 +78,7 @@ Suggests: %{name}-db_unixodbc
 Suggests: %{name}-xcap_client
 Suggests: %{name}-xmpp
 
+Obsoletes: openser < 1.6.0
 Requires(post):	rpm-helper
 Requires(preun):rpm-helper
 Requires(preun):rpm-helper
@@ -99,6 +100,7 @@ registrar and user location.
 Summary:	Accounts transactions information with radius support
 Group:		System/Servers
 Requires:	%{name} = %{version}-%{release}
+Obsoletes:	openser-acc_radius < 1.6.0
 
 %description	acc_radius
 ACC module is used to account transactions information to different backends
@@ -108,6 +110,7 @@ like syslog, SQL, RADIUS, DIAMETER.
 Summary:	Performs authentication using a Diameter server
 Group:		System/Servers
 Requires:	%{name} = %{version}-%{release}
+Obsoletes:	openser-diameter < 1.6.0
 
 %description	auth_diameter
 This module implements SIP authentication and authorization with DIAMETER
@@ -126,6 +129,7 @@ server, using AAA.
 Summary:	Routing extension suitable for carriers
 Group:		System/Servers
 Requires:	%{name} = %{version}-%{release}
+Obsoletes:	openser-carrierroute < 1.6.0
 
 %description	carrierroute
 A module which provides routing, balancing and blacklisting capabilities.
@@ -134,6 +138,7 @@ A module which provides routing, balancing and blacklisting capabilities.
 Summary:	Call Processing Language interpreter
 Group:		System/Servers
 Requires:	%{name} = %{version}-%{release}
+Obsoletes:	openser-cpl-c < 1.6.0
 
 %description	cpl-c
 This module implements a CPL (Call Processing Language) interpreter.
@@ -144,6 +149,7 @@ is present.
 Summary:	Berkley DB backend support
 Group:		System/Servers
 Requires:	%{name} = %{version}-%{release}
+Obsoletes:	openser-db_berkeley < 1.6.0
 
 %description	db_berkeley
 This is a module which integrates the Berkeley DB into OpenSIPS. It implements
@@ -153,6 +159,7 @@ the DB API defined in OpenSIPS.
 Summary:	H350 implementation	
 Group:		System/Servers
 Requires:	%{name} = %{version}-%{release}
+Obsoletes:	openser-h350 < 1.6.0
 
 %description	h350
 The OpenSIPS H350 module enables an OpenSIPS SIP proxy server to access SIP
@@ -163,6 +170,7 @@ commObjects.
 Summary:	Gateway between OpenSIPS and a jabber server
 Group:		System/Servers
 Requires:	%{name} = %{version}-%{release}
+Obsoletes:	openser-jabber < 1.6.0
 
 %description 	jabber
 Jabber module that integrates XODE XML parser for parsing Jabber messages.
@@ -171,6 +179,7 @@ Jabber module that integrates XODE XML parser for parsing Jabber messages.
 Summary:	LDAP connector
 Group:		System/Servers
 Requires:	%{name} = %{version}-%{release}
+Obsoletes:	openser-ldap < 1.6.0
 
 %description	ldap
 The LDAP module implements an LDAP search interface for OpenSIPS.
@@ -179,6 +188,7 @@ The LDAP module implements an LDAP search interface for OpenSIPS.
 Summary:	MySQL Storage Support for the OpenSIPS
 Group:		System/Servers
 Requires:	%{name} = %{version}-%{release}
+Obsoletes:	openser-mysql < 1.6.0
 
 %description 	db_mysql
 The %{name}-db_mysql package contains the MySQL plugin for %{name}, which allows
@@ -188,6 +198,7 @@ a MySQL-Database to be used for persistent storage.
 Summary:	Helps implement your own OpenSIPS extensions in Perl
 Group:		System/Servers
 Requires:	%{name} = %{version}-%{release}
+Obsoletes:	openser-perl < 1.6.0
 
 %description	perl
 The time needed when writing a new OpenSIPS module unfortunately is quite
@@ -203,6 +214,7 @@ Summary:	Perl virtual database engine
 Group:		System/Servers
 Requires:	%{name} = %{version}-%{release}
 Requires:	%{name}-perl
+Obsoletes:	openser-perlvdb < 1.6.0
 
 %description	perlvdb
 The Perl Virtual Database (VDB) provides a virtualization framework for
@@ -213,6 +225,7 @@ itself but lets the user relay database requests to arbitrary Perl functions.
 Summary:	PostgreSQL Storage Support for the OpenSIPS
 Group:		System/Servers
 Requires:	%{name} = %{version}-%{release}
+Obsoletes:	openser-db_postgres < 1.6.0
 
 %description	db_postgres
 The %{name}-db_postgres package contains the PostgreSQL plugin for %{name},
@@ -222,6 +235,7 @@ which allows a PostgreSQL-Database to be used for persistent storage.
 Summary:	Presence server
 Group:		System/Servers
 Requires:	%{name} = %{version}-%{release}
+Obsoletes:	openser-presence < 1.6.0
 
 %description	presence
 This module implements a presence server. It handles PUBLISH and SUBSCRIBE
@@ -235,6 +249,7 @@ Summary:	Extension to Presence server for Message Waiting Indication
 Group:		System/Servers
 Requires:	%{name} = %{version}-%{release}
 Requires:	%{name}-presence
+Obsoletes:	openser-presence_mwi < 1.6.0
 
 %description	presence_mwi
 The module does specific handling for notify-subscribe message-summary
@@ -248,6 +263,7 @@ Group:		System/Servers
 Requires:	%{name} = %{version}-%{release}
 Requires:	%{name}-presence
 Requires:	%{name}-xcap_client
+Obsoletes:	openser-presence_xml < 1.6.0
 
 %description	presence_xml
 The module does specific handling for notify-subscribe events using xml bodies.
@@ -257,6 +273,7 @@ It is used with the general event handling module, presence.
 Summary:	Offer the functionality of a presence user agent client
 Group:		System/Servers
 Requires:	%{name} = %{version}-%{release}
+Obsoletes:	openser-pua < 1.6.0
 
 %description	pua
 This module offer the functionality of a presence user agent client, sending
@@ -268,6 +285,7 @@ Group:		System/Servers
 Requires:	%{name} = %{version}-%{release}
 Requires:	%{name}-pua
 Requires:	%{name}-presence
+Obsoletes:	openser-pua_bla < 1.6.0
 
 %description	pua_bla
 The pua_bla module enables Bridged Line Appearances support according to the
@@ -278,6 +296,7 @@ Summary:	Connector between usrloc and MI interface
 Group:		System/Servers
 Requires:	%{name} = %{version}-%{release}
 Requires:	%{name}-pua
+Obsoletes:	openser-pua_mi < 1.6.0
 
 %description	pua_mi
 The pua_mi sends offer the possibility to publish presence information
@@ -290,6 +309,7 @@ Summary:	Connector between usrloc and pua modules
 Group:		System/Servers
 Requires:	%{name} = %{version}-%{release}
 Requires:	%{name}-pua
+Obsoletes:	openser-pua_usrloc < 1.6.0
 
 %description	pua_usrloc
 This module is the connector between usrloc and pua modules. It creates the
@@ -306,6 +326,7 @@ Requires:	%{name} = %{version}-%{release}
 Requires:	%{name}-pua
 Requires:	%{name}-presence
 Requires:	%{name}-xmpp
+Obsoletes:	openser-pua_xmpp < 1.6.0
 
 %description	pua_xmpp
 This module is a gateway for presence between SIP and XMPP. It translates one
@@ -318,6 +339,7 @@ Group:		System/Servers
 Requires:	%{name} = %{version}-%{release}
 Requires:	%{name}-pua
 Requires:	%{name}-presence
+Obsoletes:	openser-rls < 1.6.0
 
 %description	rls
 The modules is a Resource List Server implementation following the
@@ -327,6 +349,7 @@ specification in RFC 4662 and RFC 4826.
 Summary:	Transfers the execution logic control to a given external entity
 Group:		System/Servers
 Requires:	%{name} = %{version}-%{release}
+Obsoletes:	openser-seas < 1.6.0
 
 %description	seas
 SEAS module enables OpenSIPS to transfer the execution logic control of a sip
@@ -342,6 +365,7 @@ with a SIP repy, etc
 Summary:	Gateway between SIP and GSM networks via sms
 Group:		System/Servers
 Requires:	%{name} = %{version}-%{release}
+Obsoletes:	openser-sms < 1.6.0
 
 %description	sms
 This module provides a way of communication between SIP network (via SIP
@@ -349,12 +373,13 @@ MESSAGE) and GSM networks (via ShortMessageService). Communication is
 possible from SIP to SMS and vice versa.  The module provides facilities
 like SMS confirmation--the gateway can confirm to the SIP user if his
 message really reached its destination as a SMS--or multi-part messages--if
-a SIP messages is too long it will be split and sent as multiple SMS.
+a SIP messages is too log it will be split and sent as multiple SMS.
 
 %package	snmpstats
 Summary:	SNMP management interface for the OpenSIPS
 Group:		System/Servers
 Requires:	%{name} = %{version}-%{release}
+Obsoletes:	openser-snmpstats < 1.6.0
 
 %description	snmpstats
 The %{name}-snmpstats package provides an SNMP management interface to
@@ -366,6 +391,7 @@ information, and alarm monitoring capabilities.
 Summary:	TLS-relating functions for the OpenSIPS
 Group:		System/Servers
 Requires:	%{name} = %{version}-%{release}
+Obsoletes:	openser-tlsops < 1.6.0
 
 %description	tlsops
 The %{name}-tlsops package implements TLS related functions to use in the
@@ -376,6 +402,7 @@ parameters.
 Summary:	OpenSIPS unixODBC Storage support
 Group:		System/Servers
 Requires:	%{name} = %{version}-%{release}
+Obsoletes:	openser-unixodbc < 1.6.0
 
 %description	db_unixodbc
 The %{name}-unixodbc package contains the unixODBC plugin for %{name}, which
@@ -385,6 +412,7 @@ allows a unixODBC to be used for persistent storage
 Summary:	XCAP client
 Group:		System/Servers
 Requires:	%{name} = %{version}-%{release}
+Obsoletes:	openser-xcap_client < 1.6.0
 
 %description	xcap_client
 The modules is an XCAP client for OpenSIPS that can be used by other modules.
@@ -396,6 +424,7 @@ library as a client-side HTTP transfer library.
 Summary:	Gateway between OpenSIPS and a jabber server
 Group:		System/Servers
 Requires:	%{name} = %{version}-%{release}
+Obsoletes:	openser-xmpp < 1.6.0
 
 %description	xmpp
 This modules is a gateway between OpenSIPS and a jabber server. It enables
