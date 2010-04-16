@@ -6,7 +6,7 @@
 Summary:	SIP Server
 Name:		opensips
 Version:	1.6.2
-Release:	%mkrel 3
+Release:	%mkrel 4
 License:	GPLv2+
 Group:		System/Servers
 Source0:	http://www.opensips.org/pub/%{name}/%{version}/src/%{name}-%{version}-tls_src.tar.gz
@@ -110,7 +110,7 @@ like syslog, SQL, RADIUS, DIAMETER.
 Summary:	Performs authentication using a Diameter server
 Group:		System/Servers
 Requires:	%{name} = %{version}-%{release}
-Obsoletes:	openser-diameter < 1.6.0
+Obsoletes:	openser-auth_diameter < 1.6.0
 
 %description	auth_diameter
 This module implements SIP authentication and authorization with DIAMETER
@@ -225,7 +225,7 @@ itself but lets the user relay database requests to arbitrary Perl functions.
 Summary:	PostgreSQL Storage Support for the OpenSIPS
 Group:		System/Servers
 Requires:	%{name} = %{version}-%{release}
-Obsoletes:	openser-db_postgres < 1.6.0
+Obsoletes:	openser-postgresql < 1.6.0
 
 %description	db_postgres
 The %{name}-db_postgres package contains the PostgreSQL plugin for %{name},
