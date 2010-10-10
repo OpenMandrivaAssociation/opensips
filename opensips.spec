@@ -6,7 +6,7 @@
 Summary:	SIP Server
 Name:		opensips
 Version:	1.6.2
-Release:	%mkrel 5
+Release:	%mkrel 6
 License:	GPLv2+
 Group:		System/Servers
 Source0:	http://www.opensips.org/pub/%{name}/%{version}/src/%{name}-%{version}-tls_src.tar.gz
