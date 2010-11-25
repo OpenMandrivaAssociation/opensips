@@ -5,8 +5,8 @@
 
 Summary:	SIP Server
 Name:		opensips
-Version:	1.6.2
-Release:	%mkrel 6
+Version:	1.6.3
+Release:	%mkrel 1
 License:	GPLv2+
 Group:		System/Servers
 Source0:	http://www.opensips.org/pub/%{name}/%{version}/src/%{name}-%{version}-tls_src.tar.gz
@@ -613,7 +613,7 @@ rm -rf %{buildroot}
 %{_libdir}/%{name}/modules/uri.so
 %{_libdir}/%{name}/modules/userblacklist.so
 %{_libdir}/%{name}/modules/usrloc.so
-%{_libdir}/%{name}/modules/xlog.so
+#%{_libdir}/%{name}/modules/xlog.so
 
 
 %doc docdir/README.acc
@@ -662,7 +662,7 @@ rm -rf %{buildroot}
 %doc docdir/README.uac_redirect
 %doc docdir/README.uri
 %doc docdir/README.usrloc
-%doc docdir/README.xlog
+#%doc docdir/README.xlog
 
 %files acc_radius
 %defattr(-,root,root,-)
