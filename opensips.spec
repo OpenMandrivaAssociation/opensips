@@ -5,16 +5,14 @@
 
 Summary:	SIP Server
 Name:		opensips
-Version:	1.6.3
-Release:	%mkrel 7
+Version:	1.7.0
+Release:	%mkrel 1
 License:	GPLv2+
 Group:		System/Servers
-Source0:	http://www.opensips.org/pub/%{name}/%{version}/src/%{name}-%{version}-tls_src.tar.gz
-# not sent upstream yet
-Patch0:     opensips-1.6.2-fix_format_string.diff
-
+Source0:	http://www.opensips.org/pub/%{name}/%{version}/src/%{name}-%{version}_src.tar.gz
 URL:		http://www.opensips.org/
-
+Patch0:		opensips-1.7.0-tls-no-undefined.diff
+Patch1:		opensips-1.7.0-tls-soname_for_modules.diff
 BuildRequires:	expat-devel
 BuildRequires:	libxml2-devel
 BuildRequires: 	bison
@@ -32,7 +30,7 @@ BuildRequires:	openssl-devel
 BuildRequires:	expat-devel
 BuildRequires:	xmlrpc-c-devel
 BuildRequires:	confuse-devel
-BuildRequires:	db4-devel
+BuildRequires:	db-devel
 BuildRequires:	openldap-devel
 BuildRequires:	curl-devel
 BuildRequires:	perl(ExtUtils::MakeMaker)
@@ -43,7 +41,9 @@ BuildRequires:  json-c-devel
 # https://qa.mandriva.com/show_bug.cgi?id=58287
 BuildRequires:  pkgconfig(libmemcached)
 BuildRequires:  GeoIP-devel
-BuildRequires:  pkgconfig(libpcre)  
+BuildRequires:  pkgconfig(libpcre)
+
+BuildRequires:	python-devel
 
 # (Anssi 02/2008) Suggests as per debian:
 Suggests: %{name}-acc_radius
@@ -99,7 +99,7 @@ registrar and user location.
 %package	acc_radius
 Summary:	Accounts transactions information with radius support
 Group:		System/Servers
-Requires:	%{name} = %{version}-%{release}
+Requires:	%{name} >= %{version}-%{release}
 Obsoletes:	openser-acc_radius < 1.6.0
 
 %description	acc_radius
@@ -109,7 +109,7 @@ like syslog, SQL, RADIUS, DIAMETER.
 %package	auth_diameter
 Summary:	Performs authentication using a Diameter server
 Group:		System/Servers
-Requires:	%{name} = %{version}-%{release}
+Requires:	%{name} >= %{version}-%{release}
 Obsoletes:	openser-auth_diameter < 1.6.0
 
 %description	auth_diameter
@@ -119,7 +119,7 @@ server, namely DIameter Server Client (DISC).
 %package	auth_aaa
 Summary:	Performs authentication using a Radius server
 Group:		System/Servers
-Requires:	%{name} = %{version}-%{release}
+Requires:	%{name} >= %{version}-%{release}
 
 %description	auth_aaa
 This module implements SIP authentication and authorization with RADIUS
@@ -128,7 +128,7 @@ server, using AAA.
 %package	carrierroute
 Summary:	Routing extension suitable for carriers
 Group:		System/Servers
-Requires:	%{name} = %{version}-%{release}
+Requires:	%{name} >= %{version}-%{release}
 Obsoletes:	openser-carrierroute < 1.6.0
 
 %description	carrierroute
@@ -137,7 +137,7 @@ A module which provides routing, balancing and blacklisting capabilities.
 %package	cpl-c
 Summary:	Call Processing Language interpreter
 Group:		System/Servers
-Requires:	%{name} = %{version}-%{release}
+Requires:	%{name} >= %{version}-%{release}
 Obsoletes:	openser-cpl-c < 1.6.0
 
 %description	cpl-c
@@ -148,7 +148,7 @@ is present.
 %package	db_berkeley
 Summary:	Berkley DB backend support
 Group:		System/Servers
-Requires:	%{name} = %{version}-%{release}
+Requires:	%{name} >= %{version}-%{release}
 Obsoletes:	openser-db_berkeley < 1.6.0
 
 %description	db_berkeley
@@ -156,9 +156,9 @@ This is a module which integrates the Berkeley DB into OpenSIPS. It implements
 the DB API defined in OpenSIPS.
 
 %package	h350
-Summary:	H350 implementation	
+Summary:	H350 implementation
 Group:		System/Servers
-Requires:	%{name} = %{version}-%{release}
+Requires:	%{name} >= %{version}-%{release}
 Obsoletes:	openser-h350 < 1.6.0
 
 %description	h350
@@ -169,7 +169,7 @@ commObjects.
 %package	jabber
 Summary:	Gateway between OpenSIPS and a jabber server
 Group:		System/Servers
-Requires:	%{name} = %{version}-%{release}
+Requires:	%{name} >= %{version}-%{release}
 Obsoletes:	openser-jabber < 1.6.0
 
 %description 	jabber
@@ -178,7 +178,7 @@ Jabber module that integrates XODE XML parser for parsing Jabber messages.
 %package	ldap
 Summary:	LDAP connector
 Group:		System/Servers
-Requires:	%{name} = %{version}-%{release}
+Requires:	%{name} >= %{version}-%{release}
 Obsoletes:	openser-ldap < 1.6.0
 
 %description	ldap
@@ -187,7 +187,7 @@ The LDAP module implements an LDAP search interface for OpenSIPS.
 %package	db_mysql
 Summary:	MySQL Storage Support for the OpenSIPS
 Group:		System/Servers
-Requires:	%{name} = %{version}-%{release}
+Requires:	%{name} >= %{version}-%{release}
 Obsoletes:	openser-mysql < 1.6.0
 
 %description 	db_mysql
@@ -197,7 +197,7 @@ a MySQL-Database to be used for persistent storage.
 %package 	perl
 Summary:	Helps implement your own OpenSIPS extensions in Perl
 Group:		System/Servers
-Requires:	%{name} = %{version}-%{release}
+Requires:	%{name} >= %{version}-%{release}
 Obsoletes:	openser-perl < 1.6.0
 
 %description	perl
@@ -209,10 +209,18 @@ simple access to the full world of CPAN modules. SIP URI rewriting could be
 implemented based on regular expressions; accessing arbitrary data backends,
 e.g. LDAP or Berkeley DB files, is now extremely simple.
 
+%package 	python
+Summary:	Track of per dialog SDP session(s)
+Group:		System/Servers
+Requires:	%{name} >= %{version}-%{release}
+
+%description	python
+Track of per dialog SDP session(s)
+
 %package	perlvdb
 Summary:	Perl virtual database engine
 Group:		System/Servers
-Requires:	%{name} = %{version}-%{release}
+Requires:	%{name} >= %{version}-%{release}
 Requires:	%{name}-perl
 Obsoletes:	openser-perlvdb < 1.6.0
 
@@ -224,7 +232,7 @@ itself but lets the user relay database requests to arbitrary Perl functions.
 %package	db_postgres
 Summary:	PostgreSQL Storage Support for the OpenSIPS
 Group:		System/Servers
-Requires:	%{name} = %{version}-%{release}
+Requires:	%{name} >= %{version}-%{release}
 Obsoletes:	openser-postgresql < 1.6.0
 
 %description	db_postgres
@@ -234,7 +242,7 @@ which allows a PostgreSQL-Database to be used for persistent storage.
 %package	presence
 Summary:	Presence server
 Group:		System/Servers
-Requires:	%{name} = %{version}-%{release}
+Requires:	%{name} >= %{version}-%{release}
 Obsoletes:	openser-presence < 1.6.0
 
 %description	presence
@@ -247,7 +255,7 @@ rules.
 %package	presence_mwi
 Summary:	Extension to Presence server for Message Waiting Indication
 Group:		System/Servers
-Requires:	%{name} = %{version}-%{release}
+Requires:	%{name} >= %{version}-%{release}
 Requires:	%{name}-presence
 Obsoletes:	openser-presence_mwi < 1.6.0
 
@@ -260,7 +268,7 @@ message-summary event to it.
 %package	presence_xml
 Summary:	SIMPLE Presence extension
 Group:		System/Servers
-Requires:	%{name} = %{version}-%{release}
+Requires:	%{name} >= %{version}-%{release}
 Requires:	%{name}-presence
 Requires:	%{name}-xcap_client
 Obsoletes:	openser-presence_xml < 1.6.0
@@ -272,7 +280,7 @@ It is used with the general event handling module, presence.
 %package	pua
 Summary:	Offer the functionality of a presence user agent client
 Group:		System/Servers
-Requires:	%{name} = %{version}-%{release}
+Requires:	%{name} >= %{version}-%{release}
 Obsoletes:	openser-pua < 1.6.0
 
 %description	pua
@@ -282,7 +290,7 @@ Subscribe and Publish messages.
 %package	pua_bla
 Summary:	BLA extension for PUA
 Group:		System/Servers
-Requires:	%{name} = %{version}-%{release}
+Requires:	%{name} >= %{version}-%{release}
 Requires:	%{name}-pua
 Requires:	%{name}-presence
 Obsoletes:	openser-pua_bla < 1.6.0
@@ -294,7 +302,7 @@ specifications in draft-anil-sipping-bla-03.txt.
 %package	pua_mi
 Summary:	Connector between usrloc and MI interface
 Group:		System/Servers
-Requires:	%{name} = %{version}-%{release}
+Requires:	%{name} >= %{version}-%{release}
 Requires:	%{name}-pua
 Obsoletes:	openser-pua_mi < 1.6.0
 
@@ -307,7 +315,7 @@ resources like CPU-usage, memory, number of active subscribers ...)
 %package	pua_usrloc
 Summary:	Connector between usrloc and pua modules
 Group:		System/Servers
-Requires:	%{name} = %{version}-%{release}
+Requires:	%{name} >= %{version}-%{release}
 Requires:	%{name}-pua
 Obsoletes:	openser-pua_usrloc < 1.6.0
 
@@ -322,7 +330,7 @@ online/offline.
 %package	pua_xmpp
 Summary:	SIMPLE-XMPP Presence gateway
 Group:		System/Servers
-Requires:	%{name} = %{version}-%{release}
+Requires:	%{name} >= %{version}-%{release}
 Requires:	%{name}-pua
 Requires:	%{name}-presence
 Requires:	%{name}-xmpp
@@ -336,7 +344,7 @@ transmition of presence state information.
 %package	rls
 Summary:	Resource List Server
 Group:		System/Servers
-Requires:	%{name} = %{version}-%{release}
+Requires:	%{name} >= %{version}-%{release}
 Requires:	%{name}-pua
 Requires:	%{name}-presence
 Obsoletes:	openser-rls < 1.6.0
@@ -348,7 +356,7 @@ specification in RFC 4662 and RFC 4826.
 %package	seas
 Summary:	Transfers the execution logic control to a given external entity
 Group:		System/Servers
-Requires:	%{name} = %{version}-%{release}
+Requires:	%{name} >= %{version}-%{release}
 Obsoletes:	openser-seas < 1.6.0
 
 %description	seas
@@ -364,7 +372,7 @@ with a SIP repy, etc
 %package	sms
 Summary:	Gateway between SIP and GSM networks via sms
 Group:		System/Servers
-Requires:	%{name} = %{version}-%{release}
+Requires:	%{name} >= %{version}-%{release}
 Obsoletes:	openser-sms < 1.6.0
 
 %description	sms
@@ -378,7 +386,8 @@ a SIP messages is too log it will be split and sent as multiple SMS.
 %package	snmpstats
 Summary:	SNMP management interface for the OpenSIPS
 Group:		System/Servers
-Requires:	%{name} = %{version}-%{release}
+Requires:	%{name} >= %{version}-%{release}
+Suggests:	net-snmp-mibs
 Obsoletes:	openser-snmpstats < 1.6.0
 
 %description	snmpstats
@@ -390,7 +399,7 @@ information, and alarm monitoring capabilities.
 %package	tlsops
 Summary:	TLS-relating functions for the OpenSIPS
 Group:		System/Servers
-Requires:	%{name} = %{version}-%{release}
+Requires:	%{name} >= %{version}-%{release}
 Obsoletes:	openser-tlsops < 1.6.0
 
 %description	tlsops
@@ -401,7 +410,7 @@ parameters.
 %package	db_unixodbc
 Summary:	OpenSIPS unixODBC Storage support
 Group:		System/Servers
-Requires:	%{name} = %{version}-%{release}
+Requires:	%{name} >= %{version}-%{release}
 Obsoletes:	openser-unixodbc < 1.6.0
 
 %description	db_unixodbc
@@ -411,7 +420,7 @@ allows a unixODBC to be used for persistent storage
 %package	xcap_client
 Summary:	XCAP client
 Group:		System/Servers
-Requires:	%{name} = %{version}-%{release}
+Requires:	%{name} >= %{version}-%{release}
 Obsoletes:	openser-xcap_client < 1.6.0
 
 %description	xcap_client
@@ -423,7 +432,7 @@ library as a client-side HTTP transfer library.
 %package	xmpp
 Summary:	Gateway between OpenSIPS and a jabber server
 Group:		System/Servers
-Requires:	%{name} = %{version}-%{release}
+Requires:	%{name} >= %{version}-%{release}
 Obsoletes:	openser-xmpp < 1.6.0
 
 %description	xmpp
@@ -431,26 +440,62 @@ This modules is a gateway between OpenSIPS and a jabber server. It enables
 the exchange of instant messages between SIP clients and XMPP(jabber)
 clients.
 
+%package	rtpproxy
+Summary:	Gateway between OpenSIPS and a RTPProxy server
+Group:		System/Servers
+Requires:	%{name} >= %{version}-%{release}
+
+%description	rtpproxy
+This module is used by OpenSIPS to communicate with RTPProxy, a media relay
+proxy used to make the communication between user agents behind NAT possible.
+
+This module is also used along with RTPProxy to record media streams between
+user agents or to play media to either UAc or UAs.
+
 %prep
+
 %setup -q -n %{name}-%{version}-tls
 %patch0 -p0
+%patch1 -p0
+
 cp -pRf modules/acc modules/acc_radius
 
+# remove hard coded paths
+for i in `find -type f -name "*.[c,h]"` `find -type f -name "*.cfg"` `find -type f -name "*.xml"`; do
+perl -pi -e "s|/usr/local/lib/opensips/modules/|%{_libdir}/%{name}/modules/|g;\
+    s|/usr/local/opensips/lib/opensips/modules/|%{_libdir}/%{name}/modules/|g;\
+    s|/usr/local/lib/ser/modules/|%{_libdir}/%{name}/modules/|g;\
+    s|/usr/local/bin/|%{_bindir}/|g;s|/usr/local/sbin/|%{_sbindir}/|g;\
+    s|/usr/local/etc/opensips/|%{_sysconfdir}/%{name}/|g;\
+    s|/usr/local/etc/|%{_sysconfdir}/|g;\
+    s|/usr/local/etc\b|%{_sysconfdir}|g;\
+    s|/usr/local/lib\b|%{_libdir}|g;\
+    s|/usr/local/share\b|%{_datadir}|g" $i
+done
+
+# don't pollute the build on 64bit
+find -name "Makefile*" | xargs perl -pi -e "s|-L\\$\\(LOCALBASE\\)/lib\b|-L\\$\\(LOCALBASE\\)/%{_lib}|g"
+
 %build
-LOCALBASE=%{_prefix} CFLAGS="%{optflags}" %{make} all TLS=1 ENABLE_DIAMETER_ACC=true \
+MY_LDFLAGS=`echo %{ldflags}|perl -pi -e "s|-Wl,--no-undefined||g"`
+
+LOCALBASE=%{_prefix} CFLAGS="%{optflags}" LDFLAGS="$MY_LDFLAGS" %{make} all TLS=1 ENABLE_DIAMETER_ACC=true \
   exclude_modules="%EXCLUDE_MODULES" \
   cfg-target=%{_sysconfdir}/%{name}/ \
   modules-dir=%{_lib}/%{name}/modules
 
 %install
 rm -rf %{buildroot}
+
 %{__make} install TLS=1 exclude_modules="%EXCLUDE_MODULES" \
   basedir=%{buildroot} prefix=%{_prefix} \
   cfg-prefix=%{buildroot} \
   modules-dir=%{_lib}/%{name}/modules
 cp -pf modules/acc_radius/acc.so \
-  %{buildroot}/%{_libdir}/%{name}/modules/acc_radius.so
-chmod 0755 %{buildroot}/%{_libdir}/%{name}/modules/acc_radius.so
+  %{buildroot}%{_libdir}/%{name}/modules/acc_radius.so
+chmod 0755 %{buildroot}%{_libdir}/%{name}/modules/acc_radius.so
+
+install -m0644 modules/python/handler.py %{buildroot}%{_sysconfdir}/%{name}/
 
 # clean some things
 mkdir -p %{buildroot}/%{perl_vendorlib}
@@ -459,6 +504,8 @@ mv %{buildroot}/%{_libdir}/%{name}/perl/* \
 mv %{buildroot}/%{_sysconfdir}/%{name}/tls/README \
   %{buildroot}/%{_docdir}/%{name}/README.tls
 rm -f %{buildroot}%{_docdir}/%{name}/INSTALL
+
+rm -rf docdir
 mv %{buildroot}/%{_docdir}/%{name} docdir
 
 # recode documentation
@@ -554,7 +601,6 @@ rm -rf %{buildroot}
 %{_libdir}/%{name}/modules/closeddial.so
 %{_libdir}/%{name}/modules/db_flatstore.so
 %{_libdir}/%{name}/modules/db_http.so
-%{_libdir}/%{name}/modules/db_http.so
 %{_libdir}/%{name}/modules/db_text.so
 %{_libdir}/%{name}/modules/db_virtual.so
 %{_libdir}/%{name}/modules/dialog.so
@@ -565,13 +611,13 @@ rm -rf %{buildroot}
 %{_libdir}/%{name}/modules/domain.so
 %{_libdir}/%{name}/modules/drouting.so
 %{_libdir}/%{name}/modules/enum.so
+%{_libdir}/%{name}/modules/event_datagram.so
 %{_libdir}/%{name}/modules/exec.so
 %{_libdir}/%{name}/modules/gflags.so
 %{_libdir}/%{name}/modules/group.so
 %{_libdir}/%{name}/modules/identity.so
 %{_libdir}/%{name}/modules/imc.so
 %{_libdir}/%{name}/modules/json.so
-%{_libdir}/%{name}/modules/lcr.so
 %{_libdir}/%{name}/modules/load_balancer.so
 %{_libdir}/%{name}/modules/localcache.so
 %{_libdir}/%{name}/modules/mangler.so
@@ -591,6 +637,7 @@ rm -rf %{buildroot}
 %{_libdir}/%{name}/modules/peering.so
 %{_libdir}/%{name}/modules/permissions.so
 %{_libdir}/%{name}/modules/pike.so
+%{_libdir}/%{name}/modules/presence_callinfo.so
 %{_libdir}/%{name}/modules/presence_dialoginfo.so
 %{_libdir}/%{name}/modules/presence_xcapdiff.so
 %{_libdir}/%{name}/modules/pua_dialoginfo.so
@@ -608,13 +655,13 @@ rm -rf %{buildroot}
 %{_libdir}/%{name}/modules/stun.so
 %{_libdir}/%{name}/modules/textops.so
 %{_libdir}/%{name}/modules/tm.so
+%{_libdir}/%{name}/modules/uac_auth.so
 %{_libdir}/%{name}/modules/uac_redirect.so
+%{_libdir}/%{name}/modules/uac_registrant.so
 %{_libdir}/%{name}/modules/uac.so
 %{_libdir}/%{name}/modules/uri.so
 %{_libdir}/%{name}/modules/userblacklist.so
 %{_libdir}/%{name}/modules/usrloc.so
-#%{_libdir}/%{name}/modules/xlog.so
-
 
 %doc docdir/README.acc
 %doc docdir/README.alias_db
@@ -635,7 +682,6 @@ rm -rf %{buildroot}
 %doc docdir/README.gflags
 %doc docdir/README.group
 %doc docdir/README.imc
-%doc docdir/README.lcr
 %doc docdir/README.mangler
 %doc docdir/README.maxfwd
 %doc docdir/README.mediaproxy
@@ -733,6 +779,11 @@ rm -rf %{buildroot}
 %{perl_vendorlib}/OpenSIPS/Utils/PhoneNumbers.pm
 %{perl_vendorlib}/OpenSIPS/Utils/Debug.pm
 %doc docdir/README.perl
+
+%files python
+%defattr(-,root,root,-)
+%config(noreplace) %{_sysconfdir}/%{name}/handler.py
+%{_libdir}/%{name}/modules/python.so
 
 %files perlvdb
 %defattr(-,root,root,-)
@@ -846,5 +897,10 @@ rm -rf %{buildroot}
 %files xmpp
 %defattr(-,root,root,-)
 %{_libdir}/%{name}/modules/xmpp.so
-%doc docdir/README.xmpp
 
+%files rtpproxy
+%defattr(-,root,root,-)
+%doc modules/rtpproxy/doc
+%doc modules/rtpproxy/examples
+%doc modules/rtpproxy/README
+%{_libdir}/%{name}/modules/rtpproxy.so
