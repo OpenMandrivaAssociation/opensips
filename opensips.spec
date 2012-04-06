@@ -5,8 +5,8 @@
 
 Summary:	SIP Server
 Name:		opensips
-Version:	1.7.0
-Release:	%mkrel 2
+Version:	1.7.2
+Release:	1
 License:	GPLv2+
 Group:		System/Servers
 Source0:	http://www.opensips.org/pub/%{name}/%{version}/src/%{name}-%{version}_src.tar.gz
@@ -57,8 +57,8 @@ Suggests: %{name}-h350
 Suggests: %{name}-jabber
 Suggests: %{name}-ldap
 Suggests: %{name}-db_mysql
-Suggests: %{name}-perl
-Suggests: %{name}-perlvdb
+Suggests: perl-OpenSIPS
+Suggests: perl-OpenSIPS-VDB
 Suggests: %{name}-db_postgres
 Suggests: %{name}-presence
 Suggests: %{name}-presence_mwi
@@ -82,7 +82,6 @@ Obsoletes: openser < 1.6.0
 Requires(post):	rpm-helper
 Requires(preun):rpm-helper
 Requires(preun):rpm-helper
-BuildRoot: 	%{_tmppath}/%{name}-root
 
 %description
 OpenSIPS is a very fast and flexible SIP (RFC3261)
@@ -99,7 +98,7 @@ registrar and user location.
 %package	acc_radius
 Summary:	Accounts transactions information with radius support
 Group:		System/Servers
-Requires:	%{name} >= %{version}-%{release}
+Requires:	%{name} >= %{EVRD}
 Obsoletes:	openser-acc_radius < 1.6.0
 
 %description	acc_radius
@@ -109,7 +108,7 @@ like syslog, SQL, RADIUS, DIAMETER.
 %package	auth_diameter
 Summary:	Performs authentication using a Diameter server
 Group:		System/Servers
-Requires:	%{name} >= %{version}-%{release}
+Requires:	%{name} >= %{EVRD}
 Obsoletes:	openser-auth_diameter < 1.6.0
 
 %description	auth_diameter
@@ -119,7 +118,7 @@ server, namely DIameter Server Client (DISC).
 %package	auth_aaa
 Summary:	Performs authentication using a Radius server
 Group:		System/Servers
-Requires:	%{name} >= %{version}-%{release}
+Requires:	%{name} >= %{EVRD}
 
 %description	auth_aaa
 This module implements SIP authentication and authorization with RADIUS
@@ -128,7 +127,7 @@ server, using AAA.
 %package	carrierroute
 Summary:	Routing extension suitable for carriers
 Group:		System/Servers
-Requires:	%{name} >= %{version}-%{release}
+Requires:	%{name} >= %{EVRD}
 Obsoletes:	openser-carrierroute < 1.6.0
 
 %description	carrierroute
@@ -137,7 +136,7 @@ A module which provides routing, balancing and blacklisting capabilities.
 %package	cpl-c
 Summary:	Call Processing Language interpreter
 Group:		System/Servers
-Requires:	%{name} >= %{version}-%{release}
+Requires:	%{name} >= %{EVRD}
 Obsoletes:	openser-cpl-c < 1.6.0
 
 %description	cpl-c
@@ -148,7 +147,7 @@ is present.
 %package	db_berkeley
 Summary:	Berkley DB backend support
 Group:		System/Servers
-Requires:	%{name} >= %{version}-%{release}
+Requires:	%{name} >= %{EVRD}
 Obsoletes:	openser-db_berkeley < 1.6.0
 
 %description	db_berkeley
@@ -158,7 +157,7 @@ the DB API defined in OpenSIPS.
 %package	h350
 Summary:	H350 implementation
 Group:		System/Servers
-Requires:	%{name} >= %{version}-%{release}
+Requires:	%{name} >= %{EVRD}
 Obsoletes:	openser-h350 < 1.6.0
 
 %description	h350
@@ -169,7 +168,7 @@ commObjects.
 %package	jabber
 Summary:	Gateway between OpenSIPS and a jabber server
 Group:		System/Servers
-Requires:	%{name} >= %{version}-%{release}
+Requires:	%{name} >= %{EVRD}
 Obsoletes:	openser-jabber < 1.6.0
 
 %description 	jabber
@@ -178,7 +177,7 @@ Jabber module that integrates XODE XML parser for parsing Jabber messages.
 %package	ldap
 Summary:	LDAP connector
 Group:		System/Servers
-Requires:	%{name} >= %{version}-%{release}
+Requires:	%{name} >= %{EVRD}
 Obsoletes:	openser-ldap < 1.6.0
 
 %description	ldap
@@ -187,20 +186,21 @@ The LDAP module implements an LDAP search interface for OpenSIPS.
 %package	db_mysql
 Summary:	MySQL Storage Support for the OpenSIPS
 Group:		System/Servers
-Requires:	%{name} >= %{version}-%{release}
+Requires:	%{name} >= %{EVRD}
 Obsoletes:	openser-mysql < 1.6.0
 
 %description 	db_mysql
-The %{name}-db_mysql package contains the MySQL plugin for %{name}, which allows
-a MySQL-Database to be used for persistent storage.
+The %{name}-db_mysql package contains the MySQL plugin for %{name},
+which allows a MySQL-Database to be used for persistent storage.
 
-%package 	perl
+%package 	-n perl-OpenSIPS
 Summary:	Helps implement your own OpenSIPS extensions in Perl
 Group:		System/Servers
-Requires:	%{name} >= %{version}-%{release}
+Requires:	%{name} >= %{EVRD}
 Obsoletes:	openser-perl < 1.6.0
+%rename		opensips-perl
 
-%description	perl
+%description	-n perl-OpenSIPS
 The time needed when writing a new OpenSIPS module unfortunately is quite
 high, while the options provided by the configuration file are limited to
 the features implemented in the modules. With this Perl module, you can
@@ -212,19 +212,20 @@ e.g. LDAP or Berkeley DB files, is now extremely simple.
 %package 	python
 Summary:	Track of per dialog SDP session(s)
 Group:		System/Servers
-Requires:	%{name} >= %{version}-%{release}
+Requires:	%{name} >= %{EVRD}
 
 %description	python
 Track of per dialog SDP session(s)
 
-%package	perlvdb
+%package	-n perl-OpenSIPS-VDB
 Summary:	Perl virtual database engine
 Group:		System/Servers
-Requires:	%{name} >= %{version}-%{release}
+Requires:	%{name} >= %{EVRD}
 Requires:	%{name}-perl
 Obsoletes:	openser-perlvdb < 1.6.0
+%rename		opensips-perlvdb
 
-%description	perlvdb
+%description	-n perl-OpenSIPS-VDB
 The Perl Virtual Database (VDB) provides a virtualization framework for
 OpenSIPS's database access. It does not handle a particular database engine
 itself but lets the user relay database requests to arbitrary Perl functions.
@@ -232,7 +233,7 @@ itself but lets the user relay database requests to arbitrary Perl functions.
 %package	db_postgres
 Summary:	PostgreSQL Storage Support for the OpenSIPS
 Group:		System/Servers
-Requires:	%{name} >= %{version}-%{release}
+Requires:	%{name} >= %{EVRD}
 Obsoletes:	openser-postgresql < 1.6.0
 
 %description	db_postgres
@@ -242,7 +243,7 @@ which allows a PostgreSQL-Database to be used for persistent storage.
 %package	presence
 Summary:	Presence server
 Group:		System/Servers
-Requires:	%{name} >= %{version}-%{release}
+Requires:	%{name} >= %{EVRD}
 Obsoletes:	openser-presence < 1.6.0
 
 %description	presence
@@ -255,7 +256,7 @@ rules.
 %package	presence_mwi
 Summary:	Extension to Presence server for Message Waiting Indication
 Group:		System/Servers
-Requires:	%{name} >= %{version}-%{release}
+Requires:	%{name} >= %{EVRD}
 Requires:	%{name}-presence
 Obsoletes:	openser-presence_mwi < 1.6.0
 
@@ -268,7 +269,7 @@ message-summary event to it.
 %package	presence_xml
 Summary:	SIMPLE Presence extension
 Group:		System/Servers
-Requires:	%{name} >= %{version}-%{release}
+Requires:	%{name} >= %{EVRD}
 Requires:	%{name}-presence
 Requires:	%{name}-xcap_client
 Obsoletes:	openser-presence_xml < 1.6.0
@@ -280,7 +281,7 @@ It is used with the general event handling module, presence.
 %package	pua
 Summary:	Offer the functionality of a presence user agent client
 Group:		System/Servers
-Requires:	%{name} >= %{version}-%{release}
+Requires:	%{name} >= %{EVRD}
 Obsoletes:	openser-pua < 1.6.0
 
 %description	pua
@@ -290,7 +291,7 @@ Subscribe and Publish messages.
 %package	pua_bla
 Summary:	BLA extension for PUA
 Group:		System/Servers
-Requires:	%{name} >= %{version}-%{release}
+Requires:	%{name} >= %{EVRD}
 Requires:	%{name}-pua
 Requires:	%{name}-presence
 Obsoletes:	openser-pua_bla < 1.6.0
@@ -302,7 +303,7 @@ specifications in draft-anil-sipping-bla-03.txt.
 %package	pua_mi
 Summary:	Connector between usrloc and MI interface
 Group:		System/Servers
-Requires:	%{name} >= %{version}-%{release}
+Requires:	%{name} >= %{EVRD}
 Requires:	%{name}-pua
 Obsoletes:	openser-pua_mi < 1.6.0
 
@@ -315,7 +316,7 @@ resources like CPU-usage, memory, number of active subscribers ...)
 %package	pua_usrloc
 Summary:	Connector between usrloc and pua modules
 Group:		System/Servers
-Requires:	%{name} >= %{version}-%{release}
+Requires:	%{name} >= %{EVRD}
 Requires:	%{name}-pua
 Obsoletes:	openser-pua_usrloc < 1.6.0
 
@@ -330,7 +331,7 @@ online/offline.
 %package	pua_xmpp
 Summary:	SIMPLE-XMPP Presence gateway
 Group:		System/Servers
-Requires:	%{name} >= %{version}-%{release}
+Requires:	%{name} >= %{EVRD}
 Requires:	%{name}-pua
 Requires:	%{name}-presence
 Requires:	%{name}-xmpp
@@ -344,7 +345,7 @@ transmition of presence state information.
 %package	rls
 Summary:	Resource List Server
 Group:		System/Servers
-Requires:	%{name} >= %{version}-%{release}
+Requires:	%{name} >= %{EVRD}
 Requires:	%{name}-pua
 Requires:	%{name}-presence
 Obsoletes:	openser-rls < 1.6.0
@@ -356,7 +357,7 @@ specification in RFC 4662 and RFC 4826.
 %package	seas
 Summary:	Transfers the execution logic control to a given external entity
 Group:		System/Servers
-Requires:	%{name} >= %{version}-%{release}
+Requires:	%{name} >= %{EVRD}
 Obsoletes:	openser-seas < 1.6.0
 
 %description	seas
@@ -372,7 +373,7 @@ with a SIP repy, etc
 %package	sms
 Summary:	Gateway between SIP and GSM networks via sms
 Group:		System/Servers
-Requires:	%{name} >= %{version}-%{release}
+Requires:	%{name} >= %{EVRD}
 Obsoletes:	openser-sms < 1.6.0
 
 %description	sms
@@ -386,7 +387,7 @@ a SIP messages is too log it will be split and sent as multiple SMS.
 %package	snmpstats
 Summary:	SNMP management interface for the OpenSIPS
 Group:		System/Servers
-Requires:	%{name} >= %{version}-%{release}
+Requires:	%{name} >= %{EVRD}
 Suggests:	net-snmp-mibs
 Obsoletes:	openser-snmpstats < 1.6.0
 
@@ -399,7 +400,7 @@ information, and alarm monitoring capabilities.
 %package	tlsops
 Summary:	TLS-relating functions for the OpenSIPS
 Group:		System/Servers
-Requires:	%{name} >= %{version}-%{release}
+Requires:	%{name} >= %{EVRD}
 Obsoletes:	openser-tlsops < 1.6.0
 
 %description	tlsops
@@ -410,7 +411,7 @@ parameters.
 %package	db_unixodbc
 Summary:	OpenSIPS unixODBC Storage support
 Group:		System/Servers
-Requires:	%{name} >= %{version}-%{release}
+Requires:	%{name} >= %{EVRD}
 Obsoletes:	openser-unixodbc < 1.6.0
 
 %description	db_unixodbc
@@ -420,7 +421,7 @@ allows a unixODBC to be used for persistent storage
 %package	xcap_client
 Summary:	XCAP client
 Group:		System/Servers
-Requires:	%{name} >= %{version}-%{release}
+Requires:	%{name} >= %{EVRD}
 Obsoletes:	openser-xcap_client < 1.6.0
 
 %description	xcap_client
@@ -432,7 +433,7 @@ library as a client-side HTTP transfer library.
 %package	xmpp
 Summary:	Gateway between OpenSIPS and a jabber server
 Group:		System/Servers
-Requires:	%{name} >= %{version}-%{release}
+Requires:	%{name} >= %{EVRD}
 Obsoletes:	openser-xmpp < 1.6.0
 
 %description	xmpp
@@ -443,7 +444,7 @@ clients.
 %package	rtpproxy
 Summary:	Gateway between OpenSIPS and a RTPProxy server
 Group:		System/Servers
-Requires:	%{name} >= %{version}-%{release}
+Requires:	%{name} >= %{EVRD}
 
 %description	rtpproxy
 This module is used by OpenSIPS to communicate with RTPProxy, a media relay
@@ -521,9 +522,6 @@ mkdir -p %{buildroot}%{_initrddir}
 echo -e "\nETCDIR=\"%{_sysconfdir}/%{name}\"\n" \
   >> %{buildroot}%{_sysconfdir}/%{name}/%{name}ctlrc
 
-%clean
-rm -rf %{buildroot}
-
 %post
 %_post_service %{name}
 
@@ -547,6 +545,7 @@ rm -rf %{buildroot}
 %dir %{_libdir}/%{name}/
 %dir %{_libdir}/%{name}/modules/
 %dir %{_libdir}/%{name}/%{name}ctl/
+%dir %{_libdir}/%{name}/%{name}ctl/dbtextdb/
 
 %attr(755,root,root) %{_initrddir}/%{name}
 
@@ -765,7 +764,7 @@ rm -rf %{buildroot}
 %{_datadir}/%{name}/mysql
 %doc docdir/README.db_mysql
 
-%files perl
+%files -n perl-OpenSIPS
 %defattr(-,root,root,-)
 %dir %{perl_vendorlib}/OpenSIPS
 %dir %{perl_vendorlib}/OpenSIPS/LDAPUtils
@@ -785,7 +784,7 @@ rm -rf %{buildroot}
 %config(noreplace) %{_sysconfdir}/%{name}/handler.py
 %{_libdir}/%{name}/modules/python.so
 
-%files perlvdb
+%files -n perl-OpenSIPS-VDB
 %defattr(-,root,root,-)
 %dir %{perl_vendorlib}/OpenSIPS/VDB
 %dir %{perl_vendorlib}/OpenSIPS/VDB/Adapter
