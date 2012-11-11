@@ -1,0 +1,11 @@
+--- Makefile.modules	2011-11-07 09:28:04.324013613 +0100
++++ Makefile.modules.oden	2011-11-07 09:34:37.623240284 +0100
+@@ -34,7 +34,7 @@
+ 
+ ifeq (,$(filter $(MOD_NAME), $(static_modules)))
+ CFLAGS:=$(MOD_CFLAGS)
+-LDFLAGS:=$(MOD_LDFLAGS)
++LDFLAGS:=$(MOD_LDFLAGS) -Wl,-soname="$(NAME)"
+ endif
+ 
+ CFLAGS+=-DMOD_NAME='"$(MOD_NAME)"'

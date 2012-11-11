@@ -1,0 +1,33 @@
+--- modules/perl/Makefile	2011-07-12 18:43:15.000000000 +0200
++++ modules/perl/Makefile.oden	2011-11-07 08:42:33.964984638 +0100
+@@ -19,7 +19,7 @@
+ endif
+ 
+ ifeq ($(PERLLDOPTS),)
+-	LIBS+=$(shell perl -MExtUtils::Embed -e ldopts)
++	LIBS+=$(shell perl -MExtUtils::Embed -e ldopts|perl -pi -e 's|-Wl,--no-undefined||g')
+ else
+ 	LIBS+=$(PERLLDOPTS)
+ endif
+--- modules/perlvdb/Makefile	2011-07-12 18:43:04.000000000 +0200
++++ modules/perlvdb/Makefile.oden	2011-11-07 11:01:14.035362239 +0100
+@@ -11,7 +11,7 @@
+ endif
+ 
+ 
+-LIBS=$(shell perl -MExtUtils::Embed -e ldopts)
++LIBS=$(shell perl -MExtUtils::Embed -e ldopts|perl -pi -e 's|-Wl,--no-undefined||g')
+ DEFS+=$(shell perl -MExtUtils::Embed -e ccopts)
+ 
+ 
+--- modules/snmpstats/Makefile	2011-11-07 05:38:51.438910983 -0500
++++ modules/snmpstats/Makefile.oden	2011-11-07 05:43:35.968910945 -0500
+@@ -9,7 +9,7 @@
+ ifeq ($(HAS_BUILDER),YES)
+ 	# use autodetection
+ 	DEFS += $(shell net-snmp-config --cflags)
+-	LIBS = $(shell net-snmp-config --netsnmp-agent-libs --external-agent-libs)
++	LIBS = $(shell net-snmp-config --netsnmp-agent-libs --external-agent-libs|perl -pi -e 's|-Wl,--no-undefined||g')
+ 	INSTALLMIBDIR = $(cfg-prefix)$(shell net-snmp-config --prefix)/share/snmp/mibs
+ else
+ 	# use standard know paths
