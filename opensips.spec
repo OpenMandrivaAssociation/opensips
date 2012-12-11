@@ -903,3 +903,75 @@ echo -e "\nETCDIR=\"%{_sysconfdir}/%{name}\"\n" \
 %doc modules/rtpproxy/examples
 %doc modules/rtpproxy/README
 %{_libdir}/%{name}/modules/rtpproxy.so
+
+
+%changelog
+* Fri Apr 06 2012 Dmitry Mikhirev <dmikhirev@mandriva.org> 1.7.2-1
++ Revision: 789552
+- new version 1.7.2
+- apply perl package naming policy
+
+* Sat Feb 11 2012 Oden Eriksson <oeriksson@mandriva.com> 1.7.0-2
++ Revision: 773019
+- relink against libpcre.so.1
+
+* Mon Nov 07 2011 Oden Eriksson <oeriksson@mandriva.com> 1.7.0-1
++ Revision: 726164
+- fix more broken ldflags (todo: fix perl + net-snmp)
+- more perl ldflags bork fixes
+- 1.7.0
+- P0: fix broken perl ldflags
+- P1: use sonames for the modules
+- use slightly massaged ldflags
+- added the python and rtpproxy sub packages
+- various cleanups and fixes
+- rebuild
+
+* Mon Jul 18 2011 Oden Eriksson <oeriksson@mandriva.com> 1.6.3-6
++ Revision: 690301
+- rebuilt against new net-snmp libs
+
+* Tue Jun 21 2011 Oden Eriksson <oeriksson@mandriva.com> 1.6.3-5
++ Revision: 686441
+- rebuilt against libmemcached.so.8
+
+* Fri Apr 22 2011 Funda Wang <fwang@mandriva.org> 1.6.3-4
++ Revision: 656606
+- bump rel
+- rebuild
+
+* Thu Mar 17 2011 Oden Eriksson <oeriksson@mandriva.com> 1.6.3-2
++ Revision: 645854
+- relink against libmysqlclient.so.18
+
+* Thu Nov 25 2010 Jani Välimaa <wally@mandriva.org> 1.6.3-1mdv2011.0
++ Revision: 601229
+- new version 1.6.3
+
+* Sun Oct 10 2010 Oden Eriksson <oeriksson@mandriva.com> 1.6.2-6mdv2011.0
++ Revision: 584644
+- rebuilt against new libmemcached
+
+* Sat Apr 24 2010 Funda Wang <fwang@mandriva.org> 1.6.2-5mdv2010.1
++ Revision: 538459
+- rebuild for libmemcached 0.40
+
+* Fri Apr 16 2010 Funda Wang <fwang@mandriva.org> 1.6.2-4mdv2010.1
++ Revision: 535311
+- correct obsoletes
+
+* Fri Apr 16 2010 Funda Wang <fwang@mandriva.org> 1.6.2-3mdv2010.1
++ Revision: 535256
+- obsoletes openser prior to 1.6.0
+
+* Wed Apr 14 2010 Funda Wang <fwang@mandriva.org> 1.6.2-2mdv2010.1
++ Revision: 534635
+- rebuild
+
+* Mon Mar 22 2010 Michael Scherer <misc@mandriva.org> 1.6.2-1mdv2010.1
++ Revision: 526423
+- fix format string error, after enabling them again
+- add missing BuildRequires
+- import opensips, based on openser spec
+
+
