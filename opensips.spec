@@ -10,7 +10,7 @@ Release:	1
 License:	GPLv2+
 Group:		System/Servers
 Source0:	http://www.opensips.org/pub/%{name}/%{version}/src/%{name}-%{version}_src.tar.gz
-URL:		http://www.opensips.org/
+URL:		https://www.opensips.org/
 Patch0:		opensips-1.7.0-tls-no-undefined.diff
 Patch1:		opensips-1.7.0-tls-soname_for_modules.diff
 BuildRequires:	expat-devel
